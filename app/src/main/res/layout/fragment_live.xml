@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flipTimer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="We will be live in" />
+
+    <Button
+        android:id="@+id/grammer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Grammer Live Class" />
+
+    <Button
+        android:id="@+id/spoken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grammer"
+        android:layout_centerHorizontal="true"
+        android:text="Button" />
+
+    <com.asp.fliptimerviewlibrary.CountDownClock
+        android:id="@+id/timerProgramCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        flipTimer:almostFinishedCallbackTimeInSeconds="5"
+        flipTimer:animationDuration="850"
+        flipTimer:countdownTickInterval="1000"
+        flipTimer:digitBottomDrawable="@drawable/background_bottom"
+        flipTimer:digitDividerColor="@color/transparent"
+        flipTimer:digitPadding="2dp"
+        flipTimer:digitTextColor="@color/black"
+        flipTimer:digitTextSize="24sp"
+        flipTimer:digitTopDrawable="@drawable/background_top"
+        flipTimer:digitWidth="28dp"
+        flipTimer:halfDigitHeight="22dp"
+        flipTimer:resetSymbol="8"
+        flipTimer:splitterPadding="0dp" />
+</RelativeLayout>

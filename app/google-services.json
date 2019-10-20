@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "954723838757",
+    "firebase_url": "https://study-live-app.firebaseio.com",
+    "project_id": "study-live-app",
+    "storage_bucket": "study-live-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954723838757:android:806693988ee711cb6988cc",
+        "android_client_info": {
+          "package_name": "com.crezyprogrammer.studyliveapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954723838757-l8801kj71s45r4l65m5022jknvnfqino.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crezyprogrammer.studyliveapp",
+            "certificate_hash": "8ed0f16a9060934bdb3c10d84249aa1b717cfd73"
+          }
+        },
+        {
+          "client_id": "954723838757-jdj9drqs65cfqqfrv4dfde4t17pic2u6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1t8rw-NpZv2k2kTaTcjguXn3EkRfKKf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954723838757-jdj9drqs65cfqqfrv4dfde4t17pic2u6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
