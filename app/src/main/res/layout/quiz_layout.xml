@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/sunset">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/quiz_content"
@@ -11,20 +10,12 @@
         android:layout_height="match_parent"
         android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/time"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp" />
-
         <LinearLayout
             android:id="@+id/option"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/question"
+            android:layout_margin="10dp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -35,59 +26,25 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <RelativeLayout
+                <Button
+                    android:id="@+id/oa"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/white">
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="@color/background" />
 
-                    <TextView
-                        android:id="@+id/option1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color"
-                        android:textSize="14sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
+                <Button
+                    android:id="@+id/oc"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/option3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color" />
-                </RelativeLayout>
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,129 +54,89 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <RelativeLayout
+                <Button
+                    android:id="@+id/ob"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/white">
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="@color/background" />
 
-                    <TextView
-                        android:id="@+id/option2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color" />
-                </RelativeLayout>
-
-                <RelativeLayout
+                <Button
+                    android:id="@+id/od"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/white">
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="@color/background" />
 
-                    <TextView
-                        android:id="@+id/option4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color"
-                        android:textSize="18sp" />
-                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/options"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_below="@id/scroll"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/padding_10"
+            android:text="0/0"
+            android:textColor="#020202" />
 
-            <TextView
-                android:id="@+id/question2"
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary2">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@id/option4"
-                android:autoSizeTextType="uniform"
-                android:gravity="center_horizontal"
-                android:text="No More Life"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:visibility="invisible" />
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/passage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center|center_horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/qtext" />
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:id="@+id/question"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="@dimen/padding_10"
+            android:layout_marginTop="@dimen/padding_10"
+            android:layout_marginEnd="@dimen/padding_10"
+            android:layout_marginBottom="@dimen/padding_10"
             android:autoSizeTextType="uniform"
-            android:gravity="center_horizontal"
+            android:background="@color/colorPrimary"
+            android:gravity="center|center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
             android:textColor="@color/text_color"
-            android:textSize="20dp" />
+            android:textSize="@dimen/qtext" />
 
-        <TextView
-            android:id="@+id/level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Lavel "
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/prize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/live"
-            android:layout_marginLeft="20dp"
-            android:text="Prize"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:visibility="invisible" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/wait"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingTop="40dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="40dp"
-        android:text="Wait for next question"
-        android:textColor="@color/white"
-        android:visibility="gone" />
 </RelativeLayout>

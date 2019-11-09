@@ -1,20 +1,8 @@
 package com.crezyprogrammer.studyliveapp;
 
 public class PostModel {
-    String name,image,post_id,text,user_id;
+    String name, image, post_id, text, user_id, category;
     long time;
-
-    public PostModel(String name, String profile, String text) {
-    }
-
-    public PostModel(String name, String image, String post_id, String text, String user_id, long time) {
-        this.name = name;
-        this.image = image;
-        this.post_id = post_id;
-        this.text = text;
-        this.user_id = user_id;
-        this.time = time;
-    }
 
     public String getName() {
         return name;
@@ -56,11 +44,32 @@ public class PostModel {
         this.user_id = user_id;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public long getTime() {
         return time;
     }
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public PostModel(String name, String image, String post_id, String text, String user_id, String category, long time) {
+        this.name = name;
+        this.image = image;
+        this.post_id = post_id;
+        this.text = text;
+        this.user_id = user_id;
+        this.category = category;
+        this.time = time;
+    }
+
+    public PostModel() {
     }
 }

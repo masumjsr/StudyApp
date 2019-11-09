@@ -3,23 +3,27 @@ package com.crezyprogrammer.studyliveapp.fragment;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.crezyprogrammer.studyliveapp.MainActivity;
 import com.crezyprogrammer.studyliveapp.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,78 +37,65 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuizPracticeFragment extends Fragment {
+public class QuizPracticeFragment extends AppCompatActivity {
 
 
-    @BindView(R.id.wait)
-    TextView wait;
-    @BindView(R.id.time)
-    ImageView time;
-    @BindView(R.id.option1)
-    TextView option1;
-    @BindView(R.id.option2)
-    TextView option2;
-    @BindView(R.id.option3)
-    TextView option3;
-    @BindView(R.id.option4)
-    TextView option4;
-    @BindView(R.id.question2)
-    TextView question2;
-    @BindView(R.id.options)
-    RelativeLayout options;
+
     @BindView(R.id.question)
     TextView question;
-    @BindView(R.id.level)
-    TextView level;
-    @BindView(R.id.prize)
-    TextView prize;
-    @BindView(R.id.quiz_content)
-    RelativeLayout quizContent;
-    int i=1;
-int postion;
+    int i = 1;
+    int w = 0, r = 0;
+    int postion;
+    @BindView(R.id.passage)
+    TextView passage;
+    long total_question = 0;
+    @BindView(R.id.position)
+    TextView position_question;
+    int current = 0;
+    ProgressDialog progressDialog;
+    @BindView(R.id.oa)
+    Button oa;
+    @BindView(R.id.oc)
+    Button oc;
+    @BindView(R.id.ob)
+    Button ob;
+    @BindView(R.id.od)
+    Button od;
+
+
     public QuizPracticeFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        BottomNavigationView navBar = getActivity().findViewById(R.id.navigation);
-        navBar.setVisibility(View.GONE);
-        View view = inflater.inflate(R.layout.quiz_layout, container, false);
-        ButterKnife.bind(this,view);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.quiz_layout);
+        ButterKnife.bind(this);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("loading");
+        progressDialog.show();
+        get_total();
         buttonEnable(false);
-        getQuestion(i);
-        return view;
+        //getQuestion(i);
+
+
     }
 
-    private void buttonEnable(boolean b) {
-        option1.setClickable(b);
-        option2.setClickable(b);
-        option3.setClickable(b);
-        option4.setClickable(b);
-    }
+    private void get_total() {
 
-    private void getQuestion(int i) {
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("admin").child("practice").child(i+"");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("admin").child("practice");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    ResetColor();
-                    question.setText(Html.fromHtml(dataSnapshot.child("title").getValue().toString()));
-                    postion = dataSnapshot.child("answer").getValue(Integer.class);
-                    option1.setText(dataSnapshot.child("optionA").getValue().toString());
-                    option2.setText(dataSnapshot.child("optionB").getValue().toString());
-                    option3.setText(dataSnapshot.child("optionC").getValue().toString());
-                    option4.setText(dataSnapshot.child("optionD").getValue().toString());
-                    buttonEnable(true);
 
-                }
-                else Toast.makeText(getActivity(), "No more Question", Toast.LENGTH_SHORT).show();
-
+                total_question = dataSnapshot.getChildrenCount();
+                progressDialog.dismiss();
+                getQuestion(i);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -112,83 +103,166 @@ int postion;
         });
     }
 
-    @OnClick({R.id.option1, R.id.option2, R.id.option3, R.id.option4})
+    private void buttonEnable(boolean b) {
+        oa.setClickable(b);
+        ob.setClickable(b);
+        oc.setClickable(b);
+        od.setClickable(b);
+    }
+
+    private void getQuestion(int i) {
+
+        if (i <= total_question) {
+            position_question.setText(i + "/" + total_question);
+        }
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("loading");
+        progressDialog.show();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("admin").child("practice").child(i + "");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    ResetColor();
+                    question.setText(Html.fromHtml(dataSnapshot.child("title").getValue().toString()));
+                    postion = dataSnapshot.child("answer").getValue(Integer.class);
+                    oa.setText(dataSnapshot.child("optionA").getValue().toString());
+                    ob.setText(dataSnapshot.child("optionB").getValue().toString());
+                    oc.setText(dataSnapshot.child("optionC").getValue().toString());
+                    od.setText(dataSnapshot.child("optionD").getValue().toString());
+                    passage.setText(dataSnapshot.child("passage").getValue().toString());
+
+                    buttonEnable(true);
+                    progressDialog.dismiss();
+
+                } else {
+
+                    Builder dialogBuilder = new Builder(QuizPracticeFragment.this);
+                    // ...Irrelevant code for customizing the buttons and title
+                    LayoutInflater inflater = getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.complete, null);
+                    dialogBuilder.setView(dialogView);
+                    TextView totalL = dialogView.findViewById(R.id.totalL);
+                    TextView rightL=dialogView.findViewById(R.id.rightL);
+                    TextView wrongL=dialogView.findViewById(R.id.wrongL);
+                    Button home = dialogView.findViewById(R.id.home);
+                    TextView txt = dialogView.findViewById(R.id.textView11);
+                    txt.setText("You Have Successfully Completed Reading");
+                    totalL.setText("Total Quiz:" + total_question);
+                    rightL.setText("Right:" + r);
+                    wrongL.setText("Wrong:" + w);
+                    home.setOnClickListener(v -> {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    });
+
+                    AlertDialog alertDialog = dialogBuilder.create();
+                    try {
+                        alertDialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
+    @OnClick({R.id.oa, R.id.ob, R.id.oc, R.id.od})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.option1:
+            case R.id.oa:
                 ResetColor();
-                changeColor(option1,1);
+                changeColor(1, 1);
                 break;
-            case R.id.option2:
+            case R.id.ob:
                 ResetColor();
-                changeColor(option2,2);
+                changeColor(2, 2);
                 break;
-            case R.id.option3:
+            case R.id.oc:
                 ResetColor();
-                changeColor(option3,3);
+                changeColor(3, 3);
                 break;
-            case R.id.option4:
+            case R.id.od:
                 ResetColor();
-                changeColor(option4,4);
+                changeColor(4, 4);
                 break;
         }
     }
-    private void changeColor(TextView option,int ans) {
-        option1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option.setBackgroundColor(Color.YELLOW);
-        final Handler handler1 = new Handler();
-        handler1.postDelayed(() -> {
-            //Do something after 100ms
-            option.setBackgroundColor(Color.RED);
+
+    private void changeColor(int option, int ans) {
+        oa.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        ob.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        oc.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        od.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        // option.setBackgroundColor(Color.YELLOW);
+
+        //Do something after 100ms
+        switch (option) {
+            case 1:
+                oa.setBackgroundColor(Color.RED);
+                break;
+            case 2:
+                ob.setBackgroundColor(Color.RED);
+                break;
+            case 3:
+                oc.setBackgroundColor(Color.RED);
+                break;
+            case 4:
+                od.setBackgroundColor(Color.RED);
+                break;
+        }
+        if (postion == ans) {
 
 
-            switch (postion){
+            switch (postion) {
                 case 1:
-                    option1.setBackgroundColor(Color.GREEN);
+                    oa.setBackgroundColor(Color.GREEN);
                     break;
                 case 2:
-                    option2.setBackgroundColor(Color.GREEN);
+                    ob.setBackgroundColor(Color.GREEN);
                     break;
                 case 3:
-                    option3.setBackgroundColor(Color.GREEN);
+                    oc.setBackgroundColor(Color.GREEN);
                     break;
                 case 4:
-                    option4.setBackgroundColor(Color.GREEN);
+                    od.setBackgroundColor(Color.GREEN);
                     break;
             }
+        }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                if (ans == postion) {
+                    i++;
+                    getQuestion(i);
+                    r += 1;
+                } else {
+                    i++;
+                    getQuestion(i);
+                    w += 1;
+                }
+            }
+        }, 3000);
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    //Do something after 100ms
-                    if(ans==postion){
-                        Toast.makeText(getActivity(), "Correct!!", Toast.LENGTH_SHORT).show();
-                        getQuestion(i++);
-                    }
-                    else {
-                        Toast.makeText(getActivity(), "Wrong!!!", Toast.LENGTH_SHORT).show();
-                        Builder builder = new Builder(getActivity());
-                        builder.setTitle("Oops");
-                        builder.setCancelable(false);
-
-                        builder.setMessage("Wrong Answer");
-                        builder.setPositiveButton("ok", null);
-                        builder.show();
-                    } }
-            }, 1000);
-
-        }, 2000);
 
     }
+
     private void ResetColor() {
         buttonEnable(false);
-        option1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        option4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        oa.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        ob.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        oc.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        od.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
+
 }

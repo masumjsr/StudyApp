@@ -1,15 +1,16 @@
 package com.crezyprogrammer.studyliveapp;
 
 public class CommentModel {
-    String name,profile,text;
+    String name;
+    String profile;
+    String text;
+    String key;
 
-    public CommentModel() {
-    }
-
-    public CommentModel(String name, String profile, String text) {
+    public CommentModel(String name, String profile, String text, String key) {
         this.name = name;
         this.profile = profile;
         this.text = text;
+        this.key = key;
     }
 
     public String getName() {
@@ -34,5 +35,16 @@ public class CommentModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public CommentModel() {
     }
 }

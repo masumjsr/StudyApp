@@ -1,110 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:background="#EBECFF">
+
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:srcCompat="@drawable/ic_more_horiz_black_24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/post_text"
+        android:layout_marginStart="@dimen/text_16"
+        android:layout_marginTop="@dimen/text_16"
+        android:layout_marginEnd="@dimen/text_20"
+        android:layout_marginBottom="@dimen/text_16"
+        android:layout_toRightOf="@id/post_icon"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/like"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/like_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    app:srcCompat="@drawable/ic_like" />
+
+                <TextView
+                    android:id="@+id/post_like"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/improve"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/like_icon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    app:srcCompat="@drawable/ic_add_black_24dp" />
+
+                <TextView
+                    android:id="@+id/post_like2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/comment_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    app:srcCompat="@drawable/ic_comment_icon" />
+
+                <TextView
+                    android:id="@+id/post_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:text="8"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/post_time"
+        android:text="Cat A"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/post_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/post_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/text_20"
+        android:layout_toRightOf="@id/post_icon"
+        android:background="#FFFFFF"
+        android:paddingStart="@dimen/text_16"
+        android:paddingTop="@dimen/text_16"
+        android:paddingEnd="@dimen/text_16"
+        android:paddingBottom="@dimen/text_16"
+        android:text="Give me Some SunSine
+Give me Some Rain
+Give me another Chance
+I wanna growup once Again"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/post_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/post_icon"
+        android:text="No Name"
         android:textColor="#181717"
         android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/post_icon"
-        app:layout_constraintTop_toTopOf="@+id/post_icon" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/post_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/post_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/post_icon"
         android:text="October 10 at 2:32pm"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/post_name"
-        app:layout_constraintTop_toBottomOf="@+id/post_name" />
-
-    <TextView
-        android:id="@+id/post_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Give me Some SunSine
-Give me Some Rain
-Give me another Chance
-I wanna growup once Again"
-        android:textColor="#090909"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/post_icon"
-        app:layout_constraintTop_toBottomOf="@+id/post_icon" />
+        android:textSize="10sp" />
 
     <View
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="5dp"
         android:layout_marginTop="8dp"
-        android:background="#40707070"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:background="#10707070"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_text">
-
-        <ImageView
-            android:id="@+id/like_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="59dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_thumb_up" />
-
-        <ImageView
-            android:id="@+id/comment_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="127dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_comment_white_oval_bubble" />
-
-        <TextView
-            android:id="@+id/post_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:text="8"
-            android:textColor="#707070"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/comment_icon"
-            app:layout_constraintStart_toEndOf="@+id/comment_icon"
-            app:layout_constraintTop_toTopOf="@+id/comment_icon" />
-
-        <TextView
-            android:id="@+id/post_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="8"
-            android:textColor="#707070"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/like_icon"
-            app:layout_constraintStart_toEndOf="@+id/like_icon"
-            app:layout_constraintTop_toTopOf="@+id/like_icon" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="#40707070" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/post_icon"
@@ -114,8 +217,6 @@ I wanna growup once Again"
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_user"
         app:civ_border_color="#FF000000"
-        app:civ_border_width="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:civ_border_width="1dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

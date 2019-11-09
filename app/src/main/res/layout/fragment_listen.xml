@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/tools"
-    android:background="@drawable/sunset">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/quiz_content"
@@ -12,31 +11,105 @@
         android:layout_height="match_parent"
         android:visibility="visible">
 
+        <TextView
+            android:id="@+id/question2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/abc"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/padding_10"
+            android:layout_marginTop="@dimen/padding_10"
+            android:layout_marginEnd="@dimen/padding_10"
+            android:layout_marginBottom="@dimen/padding_10"
+            android:autoSizeTextType="uniform"
+            android:background="@color/colorPrimary"
+            android:gravity="center|center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/qtext" />
+
+        <LinearLayout
+            android:id="@+id/option"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/abc"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/oa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="@color/background" />
+
+                <Button
+                    android:id="@+id/oc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/ob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="@color/background" />
+
+                <Button
+                    android:id="@+id/od"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorPrimary2"
+                    android:text="Button"
+                    android:textColor="@color/background" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <RelativeLayout
             android:id="@+id/abc"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/audio_bg">
-
-            <com.gauravk.audiovisualizer.visualizer.WaveVisualizer
-                android:id="@+id/wave2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="5dp"
-                app:avColor="@color/colorPrimary"
-                custom:avColor="#0288D1"
-                custom:avDensity="0.175"
-                custom:avSpeed="normal"
-                custom:avType="fill" />
 
             <ImageView
                 android:id="@+id/play"
@@ -61,148 +134,22 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp" />
 
+            <com.gauravk.audiovisualizer.visualizer.WaveVisualizer
+                android:id="@+id/wave2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                app:avColor="@color/colorPrimary"
+                custom:avColor="#0288D1"
+                custom:avDensity="0.175"
+                custom:avSpeed="normal"
+                custom:avType="fill" />
+
         </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/time"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp" />
-
-        <LinearLayout
-            android:id="@+id/option"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/abc"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/option1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color"
-                        android:textSize="14sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/option3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/option2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_weight="0.5"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/option4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="0dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginBottom="5dp"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:paddingTop="1dp"
-                        android:paddingBottom="1dp"
-                        android:text="Cox's Bazar"
-                        android:textColor="@color/text_color"
-                        android:textSize="18sp" />
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/options"
@@ -210,20 +157,49 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"/>
 
-            <TextView
-                android:id="@+id/question2"
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/colorPrimary2">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@id/option4"
-                android:autoSizeTextType="uniform"
-                android:gravity="center_horizontal"
-                android:text="No More Life"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:visibility="invisible" />
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/passage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center|center_horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/qtext" />
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/scroll"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/padding_10"
+            android:text="0/0"
+            android:textColor="#020202" />
 
 
         <TextView

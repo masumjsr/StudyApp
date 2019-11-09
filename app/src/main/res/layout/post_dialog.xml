@@ -21,6 +21,15 @@
         android:hint="Write Somethings"
         android:inputType="textMultiLine" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/write"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:entries="@array/category" />
+
     <ImageView
         android:id="@+id/close"
         android:layout_width="wrap_content"
@@ -30,11 +39,14 @@
 
     <TextView
         android:id="@+id/post_button"
-        android:layout_width="339dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/write"
+        android:layout_below="@id/spinner"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:gravity="center_horizontal"
         android:paddingTop="10dp"

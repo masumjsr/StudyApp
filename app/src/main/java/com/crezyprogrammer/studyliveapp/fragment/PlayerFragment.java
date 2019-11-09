@@ -1,4 +1,4 @@
-package com.crezyprogrammer.studylive.fragment;
+package com.crezyprogrammer.studyliveapp.fragment;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.crezyprogrammer.studyliveapp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment {
+public class PlayerFragment extends Fragment {
 
 
-    public ProfileFragment() {
+    public PlayerFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_player, container, false);
     }
 
 }

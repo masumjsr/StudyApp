@@ -1,10 +1,13 @@
 package com.crezyprogrammer.studyliveapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -18,6 +21,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +34,8 @@ import butterknife.OnClick;
 public class SignInActivity extends AppCompatActivity {
     @BindView(R.id.sign_in_button)
     SignInButton signInButton;
+    @BindView(R.id.textView)
+    TextView textView;
     private int RC_SIGN_IN = 7;
     //Google Sign In Client
     GoogleSignInClient mGoogleSignInClient;
@@ -46,17 +56,11 @@ public class SignInActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if( currentUser != null)
-            startActivity(new Intent(this,MainActivity.class));
+        if (currentUser != null)
+            startActivity(new Intent(this, MainActivity.class));
     }
 
-    @OnClick(R.id.sign_in_button)
-    public void onViewClicked() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if( currentUser != null)
-            updateUI(currentUser);
-        else signIn();
-    }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -75,25 +79,34 @@ public class SignInActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w("123321", "Google sign in failed", e);
                 // ...
             }
         }
-}
+    }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d("123321", "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("123321", "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        assert user != null;
-                        updateUI(user);
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user").child(user.getUid());
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                databaseReference.child("profile_image").setValue(user.getPhotoUrl() + "");
+                                databaseReference.child("name").setValue(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        //    updateUI(user);
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(SignInActivity.this, "fail", Toast.LENGTH_SHORT).show();
@@ -105,15 +118,38 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-      //  Toast.makeText(this, ""+user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this,MainActivity.class));
+        //  Toast.makeText(this, ""+user.getPhotoUrl(), Toast.LENGTH_SHORT).show();
+
     }
 
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if( currentUser != null)
-        updateUI(currentUser);
+        if (currentUser != null)
+            updateUI(currentUser);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle oldInstanceState) {
+        super.onSaveInstanceState(oldInstanceState);
+        oldInstanceState.clear();
+    }
+
+    @OnClick({R.id.sign_in_button, R.id.textView})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.sign_in_button:
+
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("loading");
+                progressDialog.show();
+                signIn();
+                break;
+            case R.id.textView:
+
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                break;
+        }
     }
 }
