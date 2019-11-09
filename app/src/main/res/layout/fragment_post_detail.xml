@@ -26,9 +26,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 shimmer:srcCompat="@drawable/ic_more_horiz_black_24dp" />
 
-          
+
 
                 <RelativeLayout
+                    app:layout_constraintTop_toBottomOf="@+id/divider2"
+                    tools:layout_editor_absoluteX="118dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

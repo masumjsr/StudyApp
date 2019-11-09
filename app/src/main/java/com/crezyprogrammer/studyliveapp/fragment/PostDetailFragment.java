@@ -74,9 +74,6 @@ public class PostDetailFragment extends Fragment {
     EditText replay_edt;
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout shimmerViewContainer;
-    @BindView(R.id.main_ScrollView)
-    ScrollView mainScrollView;
-    private ContextMenuDialogFragment mMenuDialogFragment;
     @BindView(R.id.post_time)
     TextView postTime;
     @BindView(R.id.post_text)
@@ -93,8 +90,6 @@ public class PostDetailFragment extends Fragment {
     TextView postComment;
     @BindView(R.id.post_like)
     TextView postLike;
-    @BindView(R.id.constraintLayout)
-    ConstraintLayout constraintLayout;
     @BindView(R.id.post_icon)
     CircleImageView postIcon;
     @BindView(R.id.comment_post)
