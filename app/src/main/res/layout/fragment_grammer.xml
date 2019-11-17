@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="We will be live in" />
+                android:text="We will be live in"
+                android:visibility="gone" />
 
             <com.asp.fliptimerviewlibrary.CountDownClock
                 android:id="@+id/timerProgramCountdown"
@@ -35,6 +36,7 @@
                 android:layout_marginStart="10dp"
                 android:clipChildren="false"
                 android:clipToPadding="false"
+                android:visibility="gone"
                 flipTimer:almostFinishedCallbackTimeInSeconds="5"
                 flipTimer:animationDuration="850"
                 flipTimer:countdownTickInterval="1000"
@@ -58,7 +60,7 @@
             android:addStatesFromChildren="false"
             android:soundEffectsEnabled="false"
             android:splitMotionEvents="false"
-            android:visibility="visible"
+            android:visibility="gone"
             app:autoPlay="false"
             app:showFullScreenButton="true"
             app:showSeekBar="true"

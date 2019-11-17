@@ -5,12 +5,17 @@ public class CommentModel {
     String profile;
     String text;
     String key;
+    String id;
 
-    public CommentModel(String name, String profile, String text, String key) {
+    public CommentModel() {
+    }
+
+    public CommentModel(String name, String profile, String text, String key, String id) {
         this.name = name;
         this.profile = profile;
         this.text = text;
         this.key = key;
+        this.id = id;
     }
 
     public String getName() {
@@ -45,6 +50,11 @@ public class CommentModel {
         this.key = key;
     }
 
-    public CommentModel() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

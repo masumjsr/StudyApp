@@ -19,7 +19,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/mqdefaul" />
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/title"
@@ -30,7 +30,6 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@id/thumblin"
-            android:text="আমার জনম গেলো ভুলে ভুলে"
             android:textColor="#000000"
             android:textSize="18sp" />
 
@@ -39,8 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_toRightOf="@id/thumblin"
-            android:text="Grammer" />
+            android:layout_toRightOf="@id/thumblin" />
     </RelativeLayout>
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView

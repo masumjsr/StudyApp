@@ -52,10 +52,6 @@ public class ListenFragment extends AppCompatActivity {
     ImageView play;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    @BindView(R.id.quiz_content)
-    RelativeLayout quizContent;
-    @BindView(R.id.wait)
-    TextView wait;
     @BindView(R.id.passage)
     TextView passage;
     @BindView(R.id.abc)
@@ -70,14 +66,6 @@ public class ListenFragment extends AppCompatActivity {
     Button od;
     @BindView(R.id.question2)
     TextView question2;
-    @BindView(R.id.options)
-    RelativeLayout options;
-    @BindView(R.id.scroll)
-    ScrollView scroll;
-    @BindView(R.id.level)
-    TextView level;
-    @BindView(R.id.prize)
-    TextView prize;
 
     private Button btn;
     private boolean playPause;
@@ -300,14 +288,14 @@ public class ListenFragment extends AppCompatActivity {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ListenFragment.this);
                     // ...Irrelevant code for customizing the buttons and title
                     LayoutInflater inflater = getLayoutInflater();
-                    View dialogView = inflater.inflate(R.layout.complete, null);
+                    View dialogView = inflater.inflate(R.layout.complete2, null);
                     dialogBuilder.setView(dialogView);
                     TextView totalL = dialogView.findViewById(R.id.totalL);
                     TextView rightL=dialogView.findViewById(R.id.rightL);
                     TextView wrongL=dialogView.findViewById(R.id.wrongL);
                     Button home = dialogView.findViewById(R.id.home);
                    TextView txt = dialogView.findViewById(R.id.textView11);
-                    txt.setText("You Have Successfully Completed Listening");
+                    txt.setText("You Have Successfully Completed Your Listening Practice");
                     totalL.setText("Total Quiz:" + total_question);
                     rightL.setText("Right:" + r);
                     wrongL.setText("Wrong:" + w);

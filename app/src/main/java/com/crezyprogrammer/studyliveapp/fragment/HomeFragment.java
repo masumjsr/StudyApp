@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,10 +36,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.crezyprogrammer.studylive.fragment.ProfileFragment;
 import com.crezyprogrammer.studyliveapp.MainActivity;
 import com.crezyprogrammer.studyliveapp.Model;
-import com.crezyprogrammer.studyliveapp.PostActivity;
 import com.crezyprogrammer.studyliveapp.PostModel;
 import com.crezyprogrammer.studyliveapp.R;
 import com.crezyprogrammer.studyliveapp.SignInActivity;
@@ -353,7 +350,8 @@ public class HomeFragment extends Fragment {
                     .expandAnimation(true)
                     .build();
 
-            readMoreOption.addReadMoreTo(text_txt, Html.fromHtml(text));
+            //readMoreOption.addReadMoreTo(text_txt, Html.fromHtml(text));
+            text_txt.setText(Html.fromHtml(text));
 
             DatabaseReference comment_count = FirebaseDatabase.getInstance().getReference("post").child(post_id).child("comment");
             comment_count.addValueEventListener(new ValueEventListener() {
@@ -379,7 +377,7 @@ public class HomeFragment extends Fragment {
             });
 
             DatabaseReference like_count = FirebaseDatabase.getInstance().getReference("post").child(post_id).child("like");
-            like_count.addValueEventListener(new ValueEventListener() {
+            like_count.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     total_like = dataSnapshot.getChildrenCount() + "";
@@ -408,7 +406,7 @@ public class HomeFragment extends Fragment {
 
 
  DatabaseReference like_count2 = FirebaseDatabase.getInstance().getReference("post").child(post_id).child("like2");
-            like_count2.addValueEventListener(new ValueEventListener() {
+            like_count2.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     total_like2 = dataSnapshot.getChildrenCount() + "";
@@ -418,12 +416,12 @@ public class HomeFragment extends Fragment {
 
                         if (dataSnapshot.child(user.getUid() ).exists()) {
                             liked2 = true;
-                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_select_24dp));
+                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l2));
 
                         }
                         else {
                             liked2=false;
-                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
+                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l1));
                         }
                     }
                 }
@@ -438,7 +436,10 @@ public class HomeFragment extends Fragment {
 
             like.setOnClickListener(v ->
 
-            {
+            {Log.i("123321",post_id);
+                ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("loading");
+                progressDialog.show();
                 if (user != null) {
                     DatabaseReference like_database = FirebaseDatabase.getInstance().getReference("post").child(post_id).child("like").child(user.getUid());
 
@@ -457,8 +458,10 @@ public class HomeFragment extends Fragment {
                         like_database.setValue(true);
 
                     }
+                    progressDialog.dismiss();
 
                 } else {
+                    progressDialog.dismiss();
                     Builder builder = new Builder(getActivity());
                     builder.setTitle("Login Required");
                     builder.setMessage("You need to login to use the feature");
@@ -480,6 +483,9 @@ public class HomeFragment extends Fragment {
             improve.setOnClickListener(v ->
 
             {
+                ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("loading");
+                progressDialog.show();
                 if (user != null) {
                     DatabaseReference like_database2 = FirebaseDatabase.getInstance().getReference("post").child(post_id).child("like2").child(user.getUid());
 
@@ -487,7 +493,7 @@ public class HomeFragment extends Fragment {
 //                like_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_thumb_up_black_24dp));
                     if (liked2) {
 
-                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
+                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l1));
                         liked2 = false;
                         like_database2.removeValue();
 
@@ -496,12 +502,14 @@ public class HomeFragment extends Fragment {
                     else {
                         liked2 = true;
                         like_database2.child(user_id).setValue("true");
-                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_select_24dp));
+                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l2));
 
 
                     }
+                    progressDialog.dismiss();
 
                 } else {
+                    progressDialog.dismiss();
                     Builder builder = new Builder(getActivity());
                     builder.setTitle("Login Required");
                     builder.setMessage("You need to login to use the feature");
@@ -531,7 +539,7 @@ public class HomeFragment extends Fragment {
                 activity.setComment(true);
                 PostDetailFragment nextFrag = new PostDetailFragment();
 
-                Intent intent = new Intent(getActivity(), PostActivity.class);
+                Intent intent = new Intent(getActivity(), PostDetailFragment.class);
                 intent.putExtra("text", text);
                 intent.putExtra("name", name);
                 intent.putExtra("image", image);
@@ -539,6 +547,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("total_comment", total_comment);
                 intent.putExtra("total_like", total_like);
                 intent.putExtra("time", reformat(time));
+                intent.putExtra("user_id",user_id);
                 getActivity().startActivity(intent);
 
 
@@ -633,6 +642,7 @@ public class HomeFragment extends Fragment {
                                 databaseReference.child("category").setValue(spinner.getSelectedItem().toString());
                                 databaseReference.child("name").setValue(user.getDisplayName());
                                 Toast.makeText(getActivity(), "Successfully posted", Toast.LENGTH_SHORT).show();
+
                                 dialogBuilder.dismiss();
                                 progressDialog.dismiss();
 
@@ -700,21 +710,14 @@ public class HomeFragment extends Fragment {
             TextView button1 = dialogView.findViewById(R.id.post_button);
             ImageView button2 = dialogView.findViewById(R.id.close);
 
-            button2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialogBuilder.dismiss();
-
-
-                }
-            });
+            button2.setOnClickListener(view -> dialogBuilder.dismiss());
             button1.setOnClickListener(view -> {
                 // DO SOMETHINGS
                 ProgressDialog progressDialog = new ProgressDialog(getActivity());
                 progressDialog.setMessage("loading");
                 progressDialog.show();
                 long time = System.currentTimeMillis();
-                String text = editText.getText().toString();
+                String text = editText.getText().toString().replaceAll("\\n", "<br />");
                 if (!text.isEmpty() && spinner.getSelectedItemPosition() != 0) {
 
                     Map<String, Object> map = new HashMap<>();
@@ -736,6 +739,25 @@ public class HomeFragment extends Fragment {
                                     dialogBuilder.dismiss();
                                     progressDialog.dismiss();
                                     Toast.makeText(getActivity(), "Successfully posted", Toast.LENGTH_SHORT).show();
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.child("quiz_point").exists()) {
+                                                int i = dataSnapshot.child("quiz_point").getValue(Integer.class);
+                                                reference.child("quiz_point").setValue(i + 1);
+
+                                            } else {
+                                                reference.child("quiz_point").setValue(1);
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                                 }
                             });
                 } else {

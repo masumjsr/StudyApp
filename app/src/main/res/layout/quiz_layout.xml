@@ -4,18 +4,98 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/quiz_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="visible">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_weight="0.75"
+            android:background="@color/colorPrimary">
+
+            <ScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/position"
+                android:background="@color/colorPrimary2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/passage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center|center_horizontal"
+                        android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/qtext" />
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/padding_10"
+                android:layout_marginEnd="@dimen/padding_10"
+                android:text="0/0"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight=".30"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/padding_10"
+                android:layout_marginTop="@dimen/padding_10"
+                android:layout_marginEnd="@dimen/padding_10"
+                android:layout_marginBottom="@dimen/padding_10"
+                android:autoSizeTextType="uniform"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/qtext" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/option"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/question"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1.5"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -77,66 +157,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/position"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/scroll"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="@dimen/padding_10"
-            android:text="0/0"
-            android:textColor="#020202" />
-
-
-        <ScrollView
-            android:id="@+id/scroll"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorPrimary2">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/passage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center|center_horizontal"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/qtext" />
-            </LinearLayout>
-        </ScrollView>
-
-        <TextView
-            android:id="@+id/question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/padding_10"
-            android:layout_marginTop="@dimen/padding_10"
-            android:layout_marginEnd="@dimen/padding_10"
-            android:layout_marginBottom="@dimen/padding_10"
-            android:autoSizeTextType="uniform"
-            android:background="@color/colorPrimary"
-            android:gravity="center|center_horizontal"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:text="পৃথিবীর দীর্ঘতম সমুদ্র সাগর কোনটি"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/qtext" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

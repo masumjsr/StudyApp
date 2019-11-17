@@ -13,7 +13,12 @@ class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
-        setSplashy()
+        try {
+            setSplashy()
+        } catch (e: Exception) {
+            val intent = Intent(this@LaunchActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun setSplashy() {
@@ -21,13 +26,12 @@ class LaunchActivity : AppCompatActivity() {
                 .setLogo(R.drawable.logo)
                 .setTitle(R.string.app_name)
                 .setTitleColor("#FFFFFF")
-                .setSubTitle("Largest English Learning Hum in Bangladesh")
+                .setSubTitle("Largest English Learning Hub In Bangladesh")
                 .setSubTitleColor("#FFFFFF")
                 .setProgressColor(R.color.white)
-                .setBackgroundResource(R.drawable.sunset)
                 .setAnimation(Splashy.Animation.GLOW_LOGO, 200)
                 .setFullScreen(true)
-                .setTime(800)
+                .setTime(2000)
                 .show()
 
         Splashy.onComplete(object : Splashy.OnComplete {

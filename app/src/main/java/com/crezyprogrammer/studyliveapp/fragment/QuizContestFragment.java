@@ -224,7 +224,7 @@ public class QuizContestFragment extends AppCompatActivity {
                     rightL.setText("Right:"+r);
                     wrongL.setText("Wrong:"+w);
                     TextView txt = dialogView.findViewById(R.id.textView11);
-                    txt.setText("You Have Successfully Completed Word Guru");
+                    txt.setText("You Have Successfully Completed Your Word Guru Contest");
                     home.setOnClickListener(v -> {
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                           reference.addListenerForSingleValueEvent(new ValueEventListener() {

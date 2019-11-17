@@ -74,7 +74,7 @@ public class LeaderFragment extends AppCompatActivity {
 
     private void populateRecycler(String key,RecyclerView leader) {
        i=0;
-        Query query = FirebaseDatabase.getInstance().getReference("user").orderByChild(key).limitToFirst(6);
+        Query query = FirebaseDatabase.getInstance().getReference("user").orderByChild(key).limitToFirst(5);
         FirebaseRecyclerOptions options = null;
         try {
             options = new FirebaseRecyclerOptions.Builder<LeaderModel>().setQuery(

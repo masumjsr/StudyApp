@@ -18,17 +18,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="category">
-        <item>Select Category</item>
+        <item>Select Category</item>   <item>Grammar</item>
         <item>Reading</item>
-        <item>Grammar</item>
+
         <item>Writing</item>
         <item>Listening</item>
         <item>Speaking</item>
     </string-array>
     <string-array name="category2">
-        <item>All Category</item>
+        <item>All Category</item>    <item>Grammar</item>
         <item>Reading</item>
-        <item>Grammar</item>
+
         <item>Writing</item>
         <item>Listening</item>
         <item>Speaking</item>

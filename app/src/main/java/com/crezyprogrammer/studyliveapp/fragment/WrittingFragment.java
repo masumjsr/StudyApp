@@ -73,9 +73,11 @@ public class WrittingFragment extends AppCompatActivity {
         source=getIntent().getStringExtra("mode");
         if(source.equals("e2b")){
             t="English to Bangla";
+            from.setText(t);
         }
         else {
             t="Bangla to English";
+            from.setText(t);
         }
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("admin").child("translate").child(source);

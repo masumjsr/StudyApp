@@ -17,8 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ReplayActivity"></activity>
+        <activity android:name=".LaunchActivity">
+
+        </activity>
+
+        <activity android:name=".ReplayActivity" />
         <activity android:name=".HowActivity" />
+        <activity android:name=".fragment.PostDetailFragment" />
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -32,22 +37,15 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".util.notifications.FirebaseInstanceService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
 
-        <activity
-            android:name=".LaunchActivity"
-            android:screenOrientation="sensorPortrait">
+
+
+        <activity android:name=".SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
         <activity android:name=".NoticeActivity">
 
             <!-- <intent-filter> -->
@@ -60,11 +58,9 @@
         </activity>
         <activity android:name=".fragment.SpellingContestFragment" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".PostActivity" />
         <activity android:name=".fragment.QuizContestFragment" />
         <activity android:name=".fragment.ListenFragment" />
         <activity android:name=".fragment.QuizPracticeFragment" />
-        <activity android:name=".fragment.PostDetailFragment" />
         <activity android:name=".fragment.LeaderFragment" />
         <activity android:name=".fragment.GrammerFragment" />
         <activity android:name=".fragment.SpeakingFragment" />

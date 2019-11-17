@@ -34,8 +34,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.crezyprogrammer.studyliveapp.MainActivity;
-import com.crezyprogrammer.studyliveapp.PostActivity;
 import com.crezyprogrammer.studyliveapp.PostModel;
 import com.crezyprogrammer.studyliveapp.R;
 import com.crezyprogrammer.studyliveapp.SignInActivity;
@@ -311,11 +309,11 @@ public class UserActivity extends AppCompatActivity {
 
                         if (dataSnapshot.child(user.getUid()).exists()) {
                             liked2 = true;
-                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_select_24dp));
+                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l2));
 
                         } else {
                             liked2 = false;
-                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
+                            like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l1));
                         }
                     }
                 }
@@ -377,7 +375,7 @@ public class UserActivity extends AppCompatActivity {
 //                like_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_thumb_up_black_24dp));
                     if (liked2) {
 
-                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
+                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l2));
                         liked2 = false;
                         like_database2.removeValue();
 
@@ -385,7 +383,7 @@ public class UserActivity extends AppCompatActivity {
                     } else {
                         liked2 = true;
                         like_database2.child(user_id).setValue("true");
-                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_select_24dp));
+                        like_icon2.setImageDrawable(getResources().getDrawable(R.drawable.l1));
 
 
                     }
@@ -412,11 +410,9 @@ public class UserActivity extends AppCompatActivity {
             time_txt.setText(reformat(time));
             comment.setOnClickListener(v -> {
 
-                MainActivity activity = (MainActivity) (getApplicationContext());
-                activity.setComment(true);
-                PostDetailFragment nextFrag = new PostDetailFragment();
+        
 
-                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PostDetailFragment.class);
                 intent.putExtra("text", text);
                 intent.putExtra("name", name);
                 intent.putExtra("image", image);
@@ -424,7 +420,7 @@ public class UserActivity extends AppCompatActivity {
                 intent.putExtra("total_comment", total_comment);
                 intent.putExtra("total_like", total_like);
                 intent.putExtra("time", reformat(time));
-                getApplicationContext().startActivity(intent);
+            startActivity(intent);
 
 
                 // OR using options to customize

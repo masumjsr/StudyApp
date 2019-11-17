@@ -140,14 +140,14 @@ public class QuizPracticeFragment extends AppCompatActivity {
                     Builder dialogBuilder = new Builder(QuizPracticeFragment.this);
                     // ...Irrelevant code for customizing the buttons and title
                     LayoutInflater inflater = getLayoutInflater();
-                    View dialogView = inflater.inflate(R.layout.complete, null);
+                    View dialogView = inflater.inflate(R.layout.complete2, null);
                     dialogBuilder.setView(dialogView);
                     TextView totalL = dialogView.findViewById(R.id.totalL);
                     TextView rightL=dialogView.findViewById(R.id.rightL);
                     TextView wrongL=dialogView.findViewById(R.id.wrongL);
                     Button home = dialogView.findViewById(R.id.home);
                     TextView txt = dialogView.findViewById(R.id.textView11);
-                    txt.setText("You Have Successfully Completed Reading");
+                    txt.setText("You Have Successfully Completed Your Reading Practice");
                     totalL.setText("Total Quiz:" + total_question);
                     rightL.setText("Right:" + r);
                     wrongL.setText("Wrong:" + w);

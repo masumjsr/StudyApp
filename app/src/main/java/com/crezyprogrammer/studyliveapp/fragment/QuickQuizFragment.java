@@ -173,7 +173,7 @@ public class QuickQuizFragment extends AppCompatActivity {
                     totalL.setText("Total Quiz:" + total_question);
                     rightL.setText("Right:" + r);
                     TextView txt = dialogView.findViewById(R.id.textView11);
-                    txt.setText("You Have Successfully Completed Quick Quiz");
+                    txt.setText("You Have Successfully Completed Your Quick Quiz Contest");
                     wrongL.setText("Wrong:" + w);
                     home.setOnClickListener(v -> {
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid());

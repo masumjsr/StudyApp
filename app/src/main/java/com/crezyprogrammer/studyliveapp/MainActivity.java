@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -82,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         user = FirebaseAuth.getInstance().getCurrentUser();
         //getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-
+        if (user==null) {
+            Menu nav_Menu = drawerNav.getMenu();
+            nav_Menu.findItem(R.id.logout).setVisible(false);
+        }
+        else {
+            Menu nav_Menu = drawerNav.getMenu();
+            nav_Menu.findItem(R.id.signin).setVisible(false);
+        }
         drawerSetup();
         bottomSetup();
         navHeaderSetup();
@@ -136,9 +144,17 @@ if(user!=null) {
            switch (id) {
 
                case R.id.logout:
-                   FirebaseAuth.getInstance().signOut();
-                   startActivity(new Intent(getApplicationContext(),SignInActivity.class));
+
                    drawer.closeDrawers();
+                   Builder builder2= new Builder(this);
+                   builder2.setTitle("Are You Sure?");
+                   builder2.setMessage("Are You Want To Sign Out?");
+                   builder2.setPositiveButton("Yes", (dialog, which) -> {
+                       FirebaseAuth.getInstance().signOut();
+                       startActivity(new Intent(getApplicationContext(),SignInActivity.class));
+                   });
+                   builder2.setNegativeButton("cancel", null);
+                   builder2.show();
                    break;
                case  R.id.notice:
                    startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
@@ -155,6 +171,9 @@ if(user!=null) {
                     startActivity(i);
                    drawer.closeDrawers();
                 break;
+               case R.id.signin:
+                   startActivity(new Intent(this,SignInActivity.class));
+                   break;
                 case R.id.about:
                     Builder builder = new Builder(this);
                     builder.setTitle("About Us");
@@ -215,14 +234,51 @@ if(user!=null) {
                     return true;
 
                 case R.id.live:
-                    fm.beginTransaction().hide(active).show(live).commit();
-                    active = live;
-                    comment = true;
+                    if (user!=null) {
+
+
+                        fm.beginTransaction().hide(active).show(live).commit();
+                        active = live;
+                        comment = true;
+                    }
+                    else
+                {
+                    Builder builder = new Builder(MainActivity.this);
+                    builder.setTitle("Login Required");
+                    builder.setMessage("You need to login to use the feature");
+                    builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                           startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                        }
+                    });
+                    builder.setNegativeButton("cancel", null);
+                    builder.show();
+
+                }
                     return true;
 
                 case R.id.test:
+                    if (user != null) {
+
+
                     fm.beginTransaction().hide(active).show(test).commit();
-                    active = test;
+                    active = test;}
+                         else
+                        {
+                            Builder builder = new Builder(MainActivity.this);
+                            builder.setTitle("Login Required");
+                            builder.setMessage("You need to login to use the feature");
+                            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                                }
+                            });
+                            builder.setNegativeButton("cancel", null);
+                            builder.show();
+
+                        }
                     return true;
 
                     case R.id.contest: if (user!=null) {

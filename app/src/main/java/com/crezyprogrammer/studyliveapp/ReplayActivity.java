@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.crezyprogrammer.studyliveapp.fragment.UserActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +51,7 @@ public class ReplayActivity extends AppCompatActivity {
     String  image;
     @BindView(R.id.replay_recycler)
     RecyclerView replay_recycler;
-    String post_id, key;
+    String post_id, key,user_id;
     PowerMenu powerMenu;
     FirebaseUser user;
     @BindView(R.id.more)
@@ -93,10 +94,10 @@ public class ReplayActivity extends AppCompatActivity {
 
                     try {
                         return new CommentModel
-                                (snapshot.child("name").getValue().toString(), snapshot.child("profile").getValue().toString(), snapshot.child("text").getValue().toString(), snapshot.getKey());
+                                (snapshot.child("name").getValue().toString(), snapshot.child("profile").getValue().toString(), snapshot.child("text").getValue().toString(), snapshot.getKey(),snapshot.child("id").getValue().toString());
                     } catch (Exception e) {
                         return new CommentModel
-                                ("no ", "", "no", snapshot.getKey());
+                                ("no ", "", "no", snapshot.getKey(),"");
 
                     }
                 }
@@ -104,7 +105,7 @@ public class ReplayActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter replayAdapter = new FirebaseRecyclerAdapter<CommentModel, ReplayViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ReplayViewHolder replayViewHolder, int i, @NonNull CommentModel commentModel) {
-                replayViewHolder.replay(commentModel.getName(), commentModel.getProfile(), commentModel.getText(), key, commentModel.getKey());
+                replayViewHolder.replay(commentModel.getName(), commentModel.getProfile(), commentModel.getText(), key, commentModel.getKey(),commentModel.getId());
             }
 
 
@@ -123,13 +124,20 @@ public class ReplayActivity extends AppCompatActivity {
         Intent intent = getIntent();
      String  name = intent.getStringExtra("name");
      String  text = intent.getStringExtra("text");
-
+user_id=intent.getStringExtra("user_id");
         image = intent.getStringExtra("image");
 
 
         postName.setText(name);
         postText.setText(Html.fromHtml(text));
         Picasso.get().load(image).placeholder(R.drawable.ic_user).into(postIcon);
+        postIcon.setOnClickListener(v -> {
+            Intent intent1=new Intent(getApplicationContext(), UserActivity.class);
+            intent1.putExtra("user_id",user_id);
+            intent1.putExtra("user_name",name);
+            intent1.putExtra("user_profile",image);
+           startActivity(intent1);
+        });
     }
 
     @OnClick({R.id.more, R.id.rep})
@@ -166,14 +174,12 @@ public class ReplayActivity extends AppCompatActivity {
 
            if ((user != null)) {
 
-               //    Toast.makeText(getActivity(), "click " + reprep, Toast.LENGTH_SHORT).show();
                if (!replay_edt.getText().toString().isEmpty()) {
                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("post").child(post_id).child("comment").child(key).child("replay").push();
                    databaseReference.child("name").setValue(user.getDisplayName());
                    databaseReference.child("id").setValue(user.getUid());
                    databaseReference.child("profile").setValue("" + user.getPhotoUrl());
                    databaseReference.child("text").setValue(replay_edt.getText().toString());
-                   Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
                    replay_edt.setText("");
 
 //
@@ -217,8 +223,14 @@ public class ReplayActivity extends AppCompatActivity {
 
         }
 
-        public void replay(String name, String profile, String comment_text, String key, String key_rep) {
-
+        public void replay(String name, String profile, String comment_text, String key, String key_rep,String id) {
+post_icon.setOnClickListener(v -> {
+    Intent intent1=new Intent(getApplicationContext(),UserActivity.class);
+    intent1.putExtra("user_id",id);
+    intent1.putExtra("user_name",name);
+    intent1.putExtra("user_profile",profile);
+   startActivity(intent1);
+});
 
             more.setOnClickListener(v -> {
 

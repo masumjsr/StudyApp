@@ -194,7 +194,7 @@ public class GrammerFragment extends AppCompatActivity {
 
             title_text.setText(title);
             category_text.setText(category);
-            Picasso.get().load("https://img.youtube.com/vi/" + id + "/hqdefault.jpg").placeholder(R.drawable.mqdefaul).into(thumblin);
+            Picasso.get().load("https://img.youtube.com/vi/" + id + "/hqdefault.jpg").placeholder(R.drawable.logo).into(thumblin);
             video_layout.setOnClickListener(v -> {
                 b = true;
            //     Toast.makeText(getApplicationContext(), "this " + b, Toast.LENGTH_SHORT).show();
